@@ -7,7 +7,7 @@ description: Primarily used for software libraries, the GNU LGPL requires that d
 
 note: The Free Software Foundation recommends taking the additional step of adding a boilerplate notice to the top of each file. The boilerplate can be found at the end of the license.
 
-using:
+using: {}
 
 permissions:
   - commercial-use

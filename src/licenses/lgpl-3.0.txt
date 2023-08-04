@@ -7,7 +7,7 @@ description: Permissions of this copyleft license are conditioned on making avai
 
 note: The Free Software Foundation recommends taking the additional step of adding a boilerplate notice to the top of each file. The boilerplate can be found at the end of the <a href="/licenses/gpl-3.0">GNU GPLv3 license</a>. Insert the word “Lesser” before “General” in all three places in the boilerplate notice to make sure that you refer to the GNU LGPLv3 and not the GNU GPLv3.
 
-using:
+using: {}
 
 permissions:
   - commercial-use
