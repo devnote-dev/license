@@ -49,9 +49,19 @@ class License
     _, data, content = source.split "---\n", 3
 
     license = from_yaml data
-    pointerof(license.@body).value = content
+    pointerof(license.@body).value = content.strip
 
     license
+  end
+
+  def render(*, year = nil, author = nil) : String
+    String.build { |io| self.render(io, year: year, author: author) }
+  end
+
+  def render(io : IO, *, year = nil, author = nil) : Nil
+    year ||= "<enter the year here>"
+    author ||= "<enter the author here>"
+    io << body.gsub("<%= year %>", year).gsub("<%= author %>", author)
   end
 
   macro load(id)
