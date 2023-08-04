@@ -18,9 +18,9 @@ describe License do
     license.spdx_id.should eq "0BSD"
     license.nickname.should be_nil
 
-    license.permissions.size.should eq 4
-    license.conditions.should be_empty
-    license.limitations.size.should eq 2
+    license.permissions.should eq License::Permissions[COMMERCIAL_USE, DISTRIBUTION, MODIFICATIONS, PRIVATE_USE]
+    license.conditions.should eq License::Conditions::None
+    license.limitations.should eq License::Limitations[LIABILITY, WARRANTY]
   end
 
   it "renders a license" do

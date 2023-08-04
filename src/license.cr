@@ -27,6 +27,35 @@ class License
 
   include YAML::Serializable
 
+  @[Flags]
+  enum Permissions
+    COMMERCIAL_USE
+    DISTRIBUTION
+    MODIFICATIONS
+    PATENT_USE
+    PRIVATE_USE
+  end
+
+  @[Flags]
+  enum Conditions
+    DOCUMENT_CHANGES
+    DISCLOSE_SOURCE
+    INCLUDE_COPYRIGHT
+    INCLUDE_COPYRIGHT_SOURCE
+    NETWORK_USE_DISCLOSE
+    SAME_LICENSE
+    SAME_LICENSE_FILE
+    SAME_LICENSE_LIBRARY
+  end
+
+  @[Flags]
+  enum Limitations
+    LIABILITY
+    PATENT_USE
+    TRADEMARK_USE
+    WARRANTY
+  end
+
   # An array of all available licenses. This can only be used after running the `License.init` method
   # which will load all available licenses at compile time. Attempting to use this method before
   # loading will raise an exception.
@@ -49,16 +78,14 @@ class License
   @[YAML::Field(key: "using")]
   getter used_by : Hash(String, String)
 
-  # TODO: make these enums
+  # A `Permissions` enum containing the permissions for the license.
+  getter permissions : Permissions
 
-  # An array of permission strings for the license.
-  getter permissions : Array(String)
+  # A `Conditions` enum containing the conditions permitted by the license.
+  getter conditions : Conditions
 
-  # An array of conditions permitted by the license.
-  getter conditions : Array(String)
-
-  # An array of limitations enforced by the license.
-  getter limitations : Array(String)
+  # A `Limitations` enum containing the limitations enforced by the license.
+  getter limitations : Limitations
 
   # The license content (or body).
   @[YAML::Field(ignore: true)]
@@ -73,7 +100,6 @@ class License
   # :nodoc:
   def self.unsafe_load(source : String)
     _, data, content = source.split "---\n", 3
-
     license = from_yaml data
     pointerof(license.@body).value = content.strip
 
