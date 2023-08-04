@@ -80,4 +80,4 @@ Keep in mind that the `render` macro method can also raise a compile time error 
 
 This repository is managed under the MIT license.
 
-©️ 2023 devnote-dev
+© 2023 devnote-dev
