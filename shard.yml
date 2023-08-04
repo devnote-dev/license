@@ -1,0 +1,9 @@
+name: license
+description: A simple license management library
+version: 0.1.0
+crystal: 1.8.2
+
+authors:
+  - Devonte W <https://github.com/devnote-dev>
+
+license: MIT
