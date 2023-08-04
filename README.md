@@ -38,8 +38,6 @@ licenses = License.load "bsd-2-clause", "bsd-3-clause"
 > **Warning**
 > Unknown licenses will cause a compilation error.
 
-You can also use the `License.load_all` macro to load all available licenses at compile time.
-
 You can also get all available licenses at runtime by using the `License.init` method then access them via `License.licenses`:
 
 ```crystal

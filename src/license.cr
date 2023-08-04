@@ -68,7 +68,7 @@ class License
   @[YAML::Field(key: "spdx-id")]
   getter spdx_id : String
 
-  # The nickname of the license. This is generally a variation of the license name or SPDX ID.
+  # The nickname of the license. This is generally a variation of the license name or SPDX identifier.
   getter nickname : String?
 
   # The description of the license.
