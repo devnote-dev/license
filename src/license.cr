@@ -58,7 +58,7 @@ class License
     {% if IDENTIFIERS.includes?(id) %}
       License.unsafe_load {{ read_file("./src/licenses/#{id.id}.txt") }}
     {% else %}
-      {% raise "Unknown license SPDX-ID: #{id.id}" %}
+      {% id.raise "Unknown license SPDX-ID: #{id.id}" %}
     {% end %}
   end
 
@@ -72,5 +72,17 @@ class License
     [{% for key in IDENTIFIERS %}
       License.unsafe_load({{ read_file("./src/licenses/#{key.id}.txt") }}),
     {% end %}]
+  end
+
+  macro render(id, *, year = nil, author = nil)
+    {% if IDENTIFIERS.includes?(id) %}
+      year = {{ year || "<enter the year here>" }}
+      author = {{ author || "<enter the author here>" }}
+
+      %data = ECR.render {{ "./src/licenses/#{id.id}.txt" }}
+      %data.split("---\n", 3).last.strip
+    {% else %}
+      {% id.raise "Unknown license SPDX-ID: #{id.id}" %}
+    {% end %}
   end
 end
