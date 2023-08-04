@@ -34,20 +34,23 @@ class License
     license
   end
 
-  macro get_by_id(name)
-    {% if IDENTIFIERS.includes?(name) %}
-      License.unsafe_load {{ read_file("./src/licenses/#{name.id}.txt") }}
+  macro load(id)
+    {% if IDENTIFIERS.includes?(id) %}
+      License.unsafe_load {{ read_file("./src/licenses/#{id.id}.txt") }}
     {% else %}
-      {% raise "Unknown license SPDX-ID: #{name.id}" %}
+      {% raise "Unknown license SPDX-ID: #{id.id}" %}
     {% end %}
   end
 
-  macro find_by_id(name)
-    {% name = name.downcase %}
-    {% if key = IDENTIFIERS.find &.includes?(name) %}
-      License.unsafe_load {{ read_file("./src/licenses/#{key.id}.txt") }}
-    {% else %}
-      nil
-    {% end %}
+  macro load(*ids)
+    [{% for id in ids %}
+      License.load({{ id }}),
+    {% end %}]
+  end
+
+  macro load_all
+    [{% for key in IDENTIFIERS %}
+      License.unsafe_load({{ read_file("./src/licenses/#{key.id}.txt") }}),
+    {% end %}]
   end
 end
