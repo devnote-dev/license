@@ -11,6 +11,8 @@ class License
 
   include YAML::Serializable
 
+  class_getter licenses : Array(License) { raise "Licenses were not compiled with License.init" }
+
   getter title : String
   @[YAML::Field(key: "spdx-id")]
   getter spdx_id : String
@@ -24,6 +26,10 @@ class License
   getter limitations : Array(String)
   @[YAML::Field(ignore: true)]
   property! body : String
+
+  def self.init : Nil
+    @@licenses = load_all
+  end
 
   def self.unsafe_load(source : String)
     _, data, content = source.split "---\n", 3
