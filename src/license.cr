@@ -4,6 +4,11 @@ require "yaml"
 class License
   VERSION = "0.1.0"
 
+  IDENTIFIERS = {
+    "0bsd",
+    "agpl-3.0",
+  }
+
   include YAML::Serializable
 
   getter title : String
@@ -30,10 +35,19 @@ class License
   end
 
   macro get_by_id(name)
-    {% if file_exists?("./src/licenses/#{name.id}.txt") %}
+    {% if IDENTIFIERS.includes?(name) %}
       License.unsafe_load {{ read_file("./src/licenses/#{name.id}.txt") }}
     {% else %}
       {% raise "Unknown license SPDX-ID: #{name.id}" %}
+    {% end %}
+  end
+
+  macro find_by_id(name)
+    {% name = name.downcase %}
+    {% if key = IDENTIFIERS.find &.includes?(name) %}
+      License.unsafe_load {{ read_file("./src/licenses/#{key.id}.txt") }}
+    {% else %}
+      nil
     {% end %}
   end
 end
