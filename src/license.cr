@@ -25,7 +25,7 @@ class License
   getter conditions : Array(String)
   getter limitations : Array(String)
   @[YAML::Field(ignore: true)]
-  property! body : String
+  getter body : String { raise "unreachable" }
 
   def self.init : Nil
     @@licenses = load_all
@@ -35,7 +35,7 @@ class License
     _, data, content = source.split "---\n", 3
 
     license = from_yaml data
-    license.body = content
+    pointerof(license.@body).value = content
 
     license
   end
