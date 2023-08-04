@@ -6,7 +6,21 @@ class License
 
   IDENTIFIERS = {
     "0bsd",
+    "afl-3.0",
     "agpl-3.0",
+    "apache-2.0",
+    "artistic-2.0",
+    "bsd-2-clause",
+    "bsd-3-clause-clear",
+    "bsd-3-clause",
+    "bsd-4-clause",
+    "bsl-1.0",
+    "lgpl-2.1",
+    "lgpl-3.0",
+    "mit-0",
+    "mit",
+    "mpl-2.0",
+    "wtfpl",
   }
 
   include YAML::Serializable
