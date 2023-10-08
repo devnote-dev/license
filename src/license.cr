@@ -64,8 +64,8 @@ class License
   # The title of the license.
   getter title : String
 
-  # The SPDX license identifier. See https://spdx.org/licenses/ for more information.
   @[YAML::Field(key: "spdx-id")]
+  # The SPDX license identifier. See https://spdx.org/licenses/ for more information.
   getter spdx_id : String
 
   # The nickname of the license. This is generally a variation of the license name or SPDX identifier.
@@ -74,8 +74,8 @@ class License
   # The description of the license.
   getter description : String
 
-  # A hash of sources that use the license.
   @[YAML::Field(key: "using")]
+  # A hash of sources that use the license.
   getter used_by : Hash(String, String)
 
   # A `Permissions` enum containing the permissions for the license.
@@ -87,8 +87,8 @@ class License
   # A `Limitations` enum containing the limitations enforced by the license.
   getter limitations : Limitations
 
-  # The license content (or body).
   @[YAML::Field(ignore: true)]
+  # The license content (or body).
   getter body : String { raise "unreachable" }
 
   # Loads all available licenses at compile time and initializes the `licenses` method.
