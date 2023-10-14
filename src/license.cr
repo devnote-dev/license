@@ -141,7 +141,7 @@ class License
   # ```
   macro load(id)
     {% if IDENTIFIERS.includes?(id) %}
-      License.unsafe_load {{ read_file("./src/licenses/#{id.id}.txt") }}
+      License.unsafe_load {{ read_file("#{__DIR__}/licenses/#{id.id}.txt") }}
     {% else %}
       {% id.raise "Unknown license SPDX-ID: #{id.id}" %}
     {% end %}
@@ -163,7 +163,7 @@ class License
   # Returns an array of all available licenses loaded at compile time.
   macro load_all
     [{% for key in IDENTIFIERS %}
-      License.unsafe_load({{ read_file("./src/licenses/#{key.id}.txt") }}),
+      License.unsafe_load({{ read_file("#{__DIR__}/licenses/#{key.id}.txt") }}),
     {% end %}]
   end
 
@@ -179,7 +179,7 @@ class License
       year = {{ year || "<enter the year here>" }}
       author = {{ author || "<enter the author here>" }}
 
-      %data = ECR.render {{ "./src/licenses/#{id.id}.txt" }}
+      %data = ECR.render {{ "#{__DIR__}/licenses/#{id.id}.txt" }}
       %data.split("---\n", 3).last.strip
     {% else %}
       {% id.raise "Unknown license SPDX-ID: #{id.id}" %}
