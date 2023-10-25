@@ -14,6 +14,9 @@ A simple shard for using and managing licenses in your Crystal project. All lice
 
 2. Run `shards install`
 
+> **Warning**
+> This shard only works with Crystal version 1.9.0 and above. This is due to how enum members are parsed from certain string formats.
+
 ## Usage
 
 Licenses are loaded at compile time depending on the methods you use. [Click here](/src/licenses/) for the full list of available licenses.
